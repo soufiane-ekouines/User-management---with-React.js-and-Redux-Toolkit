@@ -1,11 +1,18 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { deleteuser } from './features/user/userSlice';
 
 
 function Home() {
     const users = useSelector((state) => state.user);
-    console.log(users);
+
+    const despatch = useDispatch();
+
+    const deleteusers = (id) => {
+        despatch(deleteuser({ id: id }));
+        console.log(id);
+    }
     return (
         <div className='container'>
             <h2>App Json Server</h2>
@@ -24,8 +31,8 @@ function Home() {
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>
-                                <button>edit</button>
-                                <button>delete</button>
+                                <Link to={`/edit/${user.id}`} >edit</Link>
+                                <button onClick={() => deleteusers(user.id)}>delete</button>
                             </td>
                         </tr>
                     ))}

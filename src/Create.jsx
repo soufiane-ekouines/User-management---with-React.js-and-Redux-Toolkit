@@ -11,7 +11,7 @@ function Create() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handelSubmit = (event) => {
-        event.preventDefault();
+        event.preventDefault(); 
         dispatch(adduser({ id: users[users.length - 1].id + 1, name, email }));
         navigate('/');
     }
